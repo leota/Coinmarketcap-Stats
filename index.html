@@ -22,11 +22,31 @@
         <div class="row">
             <div class="col-md-6">
                 <h4 class="text-center">24h percentage change</h4>
-                <ul id="group24h" class="list-group"></ul>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">BTC price</th>
+                            <th scope="col">24h</th>
+                            <th scope="col">7d</th>
+                        </tr>
+                    </thead>
+                    <tbody id="group24h"></tbody>
+                </table>
             </div>
             <div class="col-md-6">
                 <h4 class="text-center">7d percentage change</h4>
-                <ul id="group7d" class="list-group"></ul>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">BTC price</th>
+                            <th scope="col">7d</th>
+                            <th scope="col">24h</th>
+                        </tr>
+                    </thead>
+                    <tbody id="group7d"></tbody>
+                </table>
             </div>
         </div>
     </div>

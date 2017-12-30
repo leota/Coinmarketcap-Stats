@@ -19,8 +19,8 @@ function parseData(data) {
         var newElement = {
             name: element.name,
             symbol: element.symbol,
-            price_btc: element.price_btc,
-            price_usd: element.price_usd,
+            price_btc: parseFloat(element.price_btc),
+            price_usd: parseFloat(element.price_usd),
             percent_change_24h: parseFloat(element.percent_change_24h),
             percent_change_7d: parseFloat(element.percent_change_7d)
         }
@@ -32,13 +32,15 @@ function parseData(data) {
 function createDayList(containerId, data) {
     var container = $('#' + containerId);
     data.forEach(element => {
+        var tr = document.createElement("tr");
         // name
-        var el = document.createElement("li");
-        el.className = 'list-group-item';
-        el.innerHTML = element.name + ' ' + '(' + element.symbol + ')';
+        var name = document.createElement("td");
+        name.innerHTML = element.name + ' ' + '(' + element.symbol + ')';
+        // BTC price
+        var btcPrice = document.createElement("td");
+        btcPrice.innerHTML = element.price_btc;
         // primary percentage change
-        var primaryPercentage = document.createElement('large');
-        primaryPercentage.className = 'abs-right';
+        var primaryPercentage = document.createElement('td');
         primaryPercentage.innerHTML = element.percent_change_24h + '%';
         if (element.percent_change_24h <= 0) {
             $(primaryPercentage).addClass('text-danger');
@@ -47,34 +49,31 @@ function createDayList(containerId, data) {
             $(primaryPercentage).addClass('text-success');
         }
         // secondary percentage change
-        var info = document.createElement('small');
-        info.innerHTML = '7d';
-        info.className = 'text-secondary ml-4';
-        var secondaryPercentage = document.createElement('small');
+        var secondaryPercentage = document.createElement('td');
         secondaryPercentage.innerHTML = element.percent_change_7d + '%';
-        secondaryPercentage.className = 'ml-2';
         if (element.percent_change_7d <= 0) {
             $(secondaryPercentage).addClass('text-danger');
         }
         else {
             $(secondaryPercentage).addClass('text-success');
         }
-        primaryPercentage.append(info, secondaryPercentage);
-        el.append(primaryPercentage);
-        container.append(el);
+        tr.append(name, btcPrice, primaryPercentage, secondaryPercentage);
+        container.append(tr);
     });
 }
 
 function createWeekList(containerId, data) {
     var container = $('#' + containerId);
     data.forEach(element => {
+        var tr = document.createElement("tr");
         // name
-        var el = document.createElement("li");
-        el.className = 'list-group-item';
-        el.innerHTML = element.name + ' ' + '(' + element.symbol + ')';
+        var name = document.createElement("td");
+        name.innerHTML = element.name + ' ' + '(' + element.symbol + ')';
+        // BTC price
+        var btcPrice = document.createElement("td");
+        btcPrice.innerHTML = element.price_btc;
         // primary percentage change
-        var primaryPercentage = document.createElement('large');
-        primaryPercentage.className = 'abs-right';
+        var primaryPercentage = document.createElement('td');
         primaryPercentage.innerHTML = element.percent_change_7d + '%';
         if (element.percent_change_7d <= 0) {
             $(primaryPercentage).addClass('text-danger');
@@ -83,21 +82,16 @@ function createWeekList(containerId, data) {
             $(primaryPercentage).addClass('text-success');
         }
         // secondary percentage change
-        var info = document.createElement('small');
-        info.innerHTML = '24h';
-        info.className = 'text-secondary ml-4';
-        var secondaryPercentage = document.createElement('small');
+        var secondaryPercentage = document.createElement('td');
         secondaryPercentage.innerHTML = element.percent_change_24h + '%';
-        secondaryPercentage.className = 'ml-2';
         if (element.percent_change_24h <= 0) {
             $(secondaryPercentage).addClass('text-danger');
         }
         else {
             $(secondaryPercentage).addClass('text-success');
         }
-        primaryPercentage.append(info, secondaryPercentage);
-        el.append(primaryPercentage);
-        container.append(el);
+        tr.append(name, btcPrice, primaryPercentage, secondaryPercentage);
+        container.append(tr);
     });
 }
 
